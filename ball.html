@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <title>Title</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .polygons {
+            fill: #ff2e72;
+            stroke-width: 2;
+            stroke: #000;
+        }
+
+        .polygons :hover{
+            fill: #f00;
+        }
+        svg{
+            background-color: #b7f0ff;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<svg width="600" height="400"></svg>
+
+<script>
+
+
+    function Ball(x,y,e) {
+        this.position = {};
+        this.velocity = {};
+        this.position.x = x;
+        this.position.y = y;
+        this.velocity.x = 2;
+        this.velocity.y = 1;
+        this.element  = e;
+        this.checkForCollision  = function() {
+            if(this.position.y >= 350){
+                this.velocity.y *= -0.9;
+            }
+
+
+            if(ball.position.x > 550){
+                ball.velocity.x *= -0.9
+            }
+
+
+            if(Math.abs(this.velocity.y) < 0.2 ){
+                this.velocity.y = 0;
+            }
+            console.log(this.velocity.y);
+            console.log(this.velocity.x);
+        };
+
+        this.renderBall =function () {
+            this.element.attr('cy', this.position.y);
+            this.element.attr('cx', this.position.x);
+        };
+    }
+
+    var gravity = 0.5;
+
+    var ballElement= d3.select('svg')
+            .append('circle')
+            .attr('id', 'ball')
+            .attr("r", 25)
+            .attr('class','polygons');
+
+    var ball = new Ball(50,50,ballElement);
+
+
+    setInterval(onTimerTick, 15); // 33 milliseconds = ~ 30 frames per sec
+
+    function onTimerTick() {
+
+
+
+        if(ball.position.y <= 350){
+            ball.velocity.y += gravity;
+        }
+
+
+
+        ball.position.x += ball.velocity.x;
+        ball.position.y += ball.velocity.y;
+
+
+
+
+        ball.checkForCollision();
+       ball.renderBall()
+
+    }
+
+
+
+
+</script>
+
+
+</body>
+</html>
