@@ -1,0 +1,9 @@
+console.log(Math.pow(2,5));
+console.log(Math.sqrt(16,2));
+console.log(Math.round(3.6));
+console.log(Math.abs(-33));
+console.log(Math.floor(3.6))
+console.log(Math.ceil(3.1));
+console.log(Math.min(3,1,2,5,2,1,3,0,-1));
+console.log(Math.exp(1));
+console.log(Math.log(5));
